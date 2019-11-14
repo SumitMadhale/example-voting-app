@@ -53,5 +53,11 @@ pipeline {
         always { 
                 echo 'Worker pipeline is complete'
                }
+        failure {
+                 slackSend (channel: "ci-cd" message: "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)")
+                }
+        success {
+                 slackSend (channel: "ci-cd" message: "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)")
+                }
          }  
 } 
