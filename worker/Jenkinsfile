@@ -16,7 +16,7 @@ pipeline {
                 echo 'Compiling worker app'
                 dir('worker')
                 { sh 'mvn compile' }
-                   }
+                  }
         }
         stage('test') 
         {
