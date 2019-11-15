@@ -20,10 +20,12 @@ pipeline {
         }
         stage('test') 
         {
+
             when 
               { 
                changeset "**/worker/**" 
               }
+
             steps {
                 echo 'Running unit tests for worker'
                 dir('worker')
@@ -32,6 +34,7 @@ pipeline {
         }
         stage('package') 
         {
+
             when 
               { branch 'master' 
                changeset "**/worker/**" 
@@ -42,11 +45,21 @@ pipeline {
                 { sh 'mvn package -DskipTests' 
                   archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
                 }
+
+            steps {
+                echo 'Packaging worker app'
+                dir('worker')
+                { sh 'mvn package' }
+
                    }
         }
                          
 
+
           }
+
+            }
+
            
         
     post { 
